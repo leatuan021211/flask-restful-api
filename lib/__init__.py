@@ -19,5 +19,8 @@ def create_app(config_file="config.py"):
     ma.init_app(app)
     create_db(app)
     app.register_blueprint(items)    
+    @app.route('/static/<path:path>')
+    def send_static(path):
+        return send_from_directory('static', path)
     app.register_blueprint(SWAGGERUI_BLUEPRINT)
     return app
